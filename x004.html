@@ -1,7 +1,8 @@
 <!DOCTYPE HTML ><html><head><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html" charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
 
-<!-- <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+<!-- <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+<script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
 <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> --> <script>AFRAME.registerComponent('spawn-in-circle', {
   schema: {
     radius: {type: 'number', default: 1}
@@ -59,13 +60,13 @@
 <a-entity obj-model="obj: #scene-obj; mtl: #scene-mtl" position="-0.542 1.5 -6.206" scale="30 30 30"></a-entity>
 
 <a-light position="0 20 0" light="color:#FF3300;intensity:0.9">
-<!-- <a-animation attribute="position" from="0 0 0" to="0 20 0" dur="50000"></a-animation>
-<a-animation attribute="intensity" to="0.9"></a-animation>-->
+<a-animation attribute="position" from="0 0 0" to="0 20 0" dur="50000"></a-animation>
+<a-animation attribute="intensity" to="0.9"></a-animation>
 </a-light>
  
-<a-entity position="0.45 1.45 -6.99" light="type:spot;decay:0.5;angle:35" rotation="-17 -0.01 -6" visible="false">
- <!-- <a-animation attribute="visible" dur="5000" to="true"></a-animation> -->
-</a-entity>
+<!--<a-entity position="0.45 1.45 -6.99" light="type:spot;decay:0.5;angle:35" rotation="-17 -0.01 -6" visible="false">
+  <a-animation attribute="visible" dur="5000" to="true"></a-animation> 
+</a-entity> -->
  
 <!--<a-entity text-geometry="value: Welcome to ;" material="color:#FF9900; " position="-1.4 0 -9.5" visible="false">
 <a-animation attribute="visible" dur="5000" to="true" ></a-animation>
