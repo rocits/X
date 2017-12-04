@@ -1,6 +1,5 @@
 <!DOCTYPE HTML ><html><head><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html" charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.2.0/aframe.min.js"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
   
 <!-- <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
 <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
@@ -50,7 +49,7 @@
 </a-asset-item>
 <a-asset-item id="scene-mtl" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/materials.mtl">
 </a-asset-item>
-<!-- <img id="sechelt" src="./images/bg3.png"> -->
+<img id="sechelt" src="./images/bg3.png">
 
 <script id="avatar-template" type="text/html">
 <a-entity class="heads">
@@ -68,7 +67,7 @@
 <a-animation attribute="position" from="0 0 0" to="0 0 -7" dur="20000"></a-animation> -->
 </a-entity>
 
-<a-sky id="image-360" radius="100" src="#sechelt" data-set-image-fade-setup="true" animation__fade=""></a-sky>
+<a-sky id="image-360" radius="00" src="#sechelt" ></a-sky> <!--data-set-image-fade-setup="true" animation__fade="" -->
  
 <a-entity obj-model="obj: #scene-obj; mtl: #scene-mtl" position="-0.542 1.5 -6.206" scale="30 30 30"></a-entity>
 
