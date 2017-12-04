@@ -4,7 +4,9 @@
   
 <!-- <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
 <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-<script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> --> <script>AFRAME.registerComponent('spawn-in-circle', {
+<script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> -->
+  
+  <script>AFRAME.registerComponent('spawn-in-circle', {
   schema: {
     radius: {type: 'number', default: 1}
   },
@@ -38,9 +40,17 @@
 </head><body>
 <a-scene stats networked-scene="room: blocks; debug: true;" width="854" height="480">
 <a-assets>
-<!--<a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"></a-asset-item>-->
-<a-asset-item id="raccoon-obj" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/model.obj"></a-asset-item><a-asset-item id="raccoon-mtl" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/materials.mtl"></a-asset-item><a-asset-item id="scene-obj" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/model.obj"></a-asset-item><a-asset-item id="scene-mtl" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/materials.mtl"></a-asset-item>
-<img id="sechelt" src="./images/bg3.png"> 
+<!--<a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json">
+</a-asset-item>-->
+<a-asset-item id="raccoon-obj" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/model.obj">
+</a-asset-item>
+<a-asset-item id="raccoon-mtl" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/materials.mtl">
+</a-asset-item>
+<a-asset-item id="scene-obj" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/model.obj">
+</a-asset-item>
+<a-asset-item id="scene-mtl" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/materials.mtl">
+</a-asset-item>
+<!-- <img id="sechelt" src="./images/bg3.png"> -->
 
 <script id="avatar-template" type="text/html">
 <a-entity class="heads">
@@ -49,6 +59,7 @@
 </script>
 
 </a-assets>
+ 
 <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera="userHeight: 1.6" spawn-in-circle="radius:2;" wasd-controls look-controls position="5 0 0"> 
 <!-- <a-entity position="5 0 0"></a-entity> 
 <a-animation attribute="position" from="5 0 0" to="2 4 0" dur="20000"></a-animation>
