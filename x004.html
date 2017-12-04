@@ -1,6 +1,7 @@
 <!DOCTYPE HTML ><html><head><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html" charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.2.0/aframe.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>-->
+  
 <!-- <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
 <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
 <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script> --> <script>AFRAME.registerComponent('spawn-in-circle', {
@@ -32,7 +33,8 @@
     var y = Math.sin(angleRad)*radius;
     return {x: x, y: y};
   }
-});</script><script>NAF.schemas.add({template: '#avatar-template',components: [position',rotation']});</script>
+});</script>
+<!--<script>NAF.schemas.add({template: '#avatar-template',components: [position',rotation']});</script> -->
 </head><body>
 <a-scene stats networked-scene="room: blocks; debug: true;" width="854" height="480">
 <a-assets>
