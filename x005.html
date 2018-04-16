@@ -59,6 +59,7 @@ if(navigator.webkitGetGamepads) {
 }
 
 function webkitGP() {
+  var gp;
   var gp = navigator.webkitGetGamepads()[0];
   if(gp) {
     gamepadInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id + ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
