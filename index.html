@@ -9,9 +9,11 @@ $("#mainTable tr").click(function(){
    var value=$(this).find('td:first').html();
    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
 });
-$('.ok').on('click', function(e){
-    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
+$('.history').on('click', function(e){
+    open.window("https://github.com/rocits/X/commits/master/"+document.getElementById('RowNo').value+".html");
 });
+  $('.edit').on('click', function(e){
+   open.window("https://github.com/rocits/X/edit/master/"+document.getElementById('RowNo').value+".html");
 });
 </script>
   <style>
@@ -29,7 +31,6 @@ $('.ok').on('click', function(e){
 <input type="text" id="RowNo" placeholder="Row No." >
 <input type="button" name="edit" class="edit" value="Edit"/>
 <input type="button" name="history" class="history" value="History"/>
-<input type="button" name="OK" class="ok" value="OK"/>
 <table id="mainTable" style="background-color:#eee">
 <tr><td><a href="./x001.html">x001</a></td><td>entrance01 fully inline?</td></tr>
 <tr><td><a href="./x002.html">x002</a></td><td>entrance01 semi inline</td></tr>
