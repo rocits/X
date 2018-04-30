@@ -19,22 +19,16 @@
   <title></title>
 <script type="text/javascript">
 $(window).load(function(){
-
-$("#table tr").click(function(){
+$("#mainTable tr").click(function(){
    $(this).addClass('selected').siblings().removeClass('selected');    
    var value=$(this).find('td:first').html();
    alert(value);    
 });
-
 $('.ok').on('click', function(e){
-    alert($("#table tr.selected td:first").html());
+    alert($("#mainTable tr.selected td:first").html());
 });
-
 });
-
 </script>
-
-  
 </head>
 
 <body>
