@@ -26,6 +26,7 @@ $("#mainTable tr").click(function(){
 });
 $('.ok').on('click', function(e){
     alert($("#mainTable tr.selected td:first").html());
+    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
 });
 });
 </script>
