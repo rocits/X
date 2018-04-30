@@ -8,12 +8,16 @@ $("#mainTable tr").click(function(){
    $(this).addClass('selected').siblings().removeClass('selected');    
    var value=$(this).find('td:first').html();
    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
+   $(this).find('td:second').append($(".actionbuttons"));
 });
 $('.history').on('click', function(e){
     window.open("https://github.com/rocits/X/commits/master/"+document.getElementById('RowNo').value+".html");
 });
   $('.edit').on('click', function(e){
   window.open("https://github.com/rocits/X/edit/master/"+document.getElementById('RowNo').value+".html");
+});
+   $('.blame').on('click', function(e){
+  window.open("https://github.com/rocits/X/blame/master/"+document.getElementById('RowNo').value+".html");
 });
    });
 </script>
@@ -29,9 +33,12 @@ $('.history').on('click', function(e){
 
 <a href="https://bitly.com/rocits-x">bitly.com/rocits-x</a><br/>
 <a href="https://github.com/rocits/X/edit/master/index.html">edit master index</a><br/>
-<input type="text" id="RowNo" placeholder="Row No." >
-<input type="button" name="edit" class="edit" value="Edit"/>
-<input type="button" name="history" class="history" value="History"/>
+<input type="text" id="RowNo" placeholder="Row No." hidden="">
+   <div class="actionbuttons">
+   <input type="button" name="edit" class="edit" value="Edit"/>
+   <input type="button" name="history" class="history" value="History"/>
+   <input type="button" name="blame" class="blame" value="Blame"/>
+   </div>
 <table id="mainTable" style="background-color:#eee">
 <tr><td><a href="./x001.html">x001</a></td><td>entrance01 fully inline?</td></tr>
 <tr><td><a href="./x002.html">x002</a></td><td>entrance01 semi inline</td></tr>
