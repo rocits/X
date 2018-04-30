@@ -8,7 +8,7 @@ $("#mainTable tr").click(function(){
    $(this).addClass('selected').siblings().removeClass('selected');    
    var value=$(this).find('td:first').html();
    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
-   $(this).find('td:second').append($(".actionbuttons"));
+   $(this).find('td:nth-child(2)').append($("div.actionbuttons").html());
 });
 $('.history').on('click', function(e){
     window.open("https://github.com/rocits/X/commits/master/"+document.getElementById('RowNo').value+".html");
