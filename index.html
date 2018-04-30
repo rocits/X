@@ -1,7 +1,7 @@
 <html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"><TITLE>over index</TITLE>
 <script>function searchTitle() {var input, filter, table, tr, td, i;input = document.getElementById("titleFilter");filter = input.value.toUpperCase();table = document.getElementById("mainTable");tr = table.getElementsByTagName("tr");for (i = 0; i < tr.length; i++) {td = tr[i].getElementsByTagName("td")[0];if (td) {if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {tr[i].style.display = "";} else {tr[i].style.display = "none";}}}}</script><input type="text" id="hashtagFilter" onkeyup="searchHash()" placeholder="Search for Description" title="Type in a name"></input><a href="#" onclick="document.getElementById('hashtagFilter').value='';searchHash(); " style="margin:-20px;">X</a><script>function searchHash() {var input, filter, table, tr, td, i;input = document.getElementById("hashtagFilter");filter = input.value.toUpperCase();table = document.getElementById("mainTable");tr = table.getElementsByTagName("tr");for (i = 0; i < tr.length; i++) {td = tr[i].getElementsByTagName("td")[1];if (td) {if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {tr[i].style.display = "";} else {tr[i].style.display = "none";}}}}</script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.3.js"></script>
-<script>
+<script type="text/javascript">
 $("#table tr").click(function(){
    $(this).addClass('selected').siblings().removeClass('selected');    
    var value=$(this).find('td:first').html();
@@ -10,10 +10,10 @@ $("#table tr").click(function(){
 
 $('.ok').on('click', function(e){
   alert($("#table tr.selected td:first").html());
-  // document.getElementById('RowNo').value=$("#table tr.selected td:first").html();
-});</script>
+});
+   </script>
   <style>
-    td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+    td {border: 0px #DDD solid; padding: 5px; cursor: pointer;}
 
 .selected {
     background-color: brown;
