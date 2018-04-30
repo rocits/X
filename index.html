@@ -10,10 +10,10 @@ $("#mainTable tr").click(function(){
    document.getElementById('RowNo').value=$("#mainTable tr.selected td:first").text();
 });
 $('.history').on('click', function(e){
-    open.window("https://github.com/rocits/X/commits/master/"+document.getElementById('RowNo').value+".html");
+    window.open("https://github.com/rocits/X/commits/master/"+document.getElementById('RowNo').value+".html");
 });
   $('.edit').on('click', function(e){
-   open.window("https://github.com/rocits/X/edit/master/"+document.getElementById('RowNo').value+".html");
+  window.open("https://github.com/rocits/X/edit/master/"+document.getElementById('RowNo').value+".html");
 });
    });
 </script>
