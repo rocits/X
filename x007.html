@@ -9,6 +9,8 @@
     
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-layout-component@4.1.0/dist/aframe-layout-component.min.js"></script>
+    
+    <script src="https://sandbox.donmccurdy.com/aframe-extras.js"></script>
 <script>
 // projectile component to have an entity travel straight.
 AFRAME.registerComponent('projectile', {
@@ -81,7 +83,7 @@ AFRAME.registerComponent('click-listener', {
     <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, 
          threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris. -->
     <!-- See more environment options: https://github.com/feiss/aframe-environment-component#parameters -->
-    <a-scene environment="preset: egypt">
+    <a-scene environment="preset: egypt" physics >
       <a-assets>
         <img id="boxTexture" src="https://rocits.github.io/X/images/rocits.png">
       </a-assets>
@@ -123,7 +125,16 @@ AFRAME.registerComponent('click-listener', {
 
   <!-- Add spawner and click-listener to player. -->
   <a-camera id="player" position="0 1.8 0" spawner="mixin: laser; on: click" click-listener></a-camera>
-
+  
+   <!-- Obstacles -->
+      <a-box color="#39BB82"
+             width="15" height="5" depth="3"
+             position="8 2.5 -5"
+             static-body></a-box>
+      <a-box color="#39BB82"
+             width="15" height="5" depth="3"
+             position="8 2.5 5"
+             static-body></a-box>
     </a-scene>
   </body>
 </html>
