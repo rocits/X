@@ -3,7 +3,7 @@
   <head>
     <title>Peter Draws | Do Not Dwell, Draw Well!</title>
     <meta name="description" content="Peter Draws | Do Not Dwell, Draw Well!">
-    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
     
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
@@ -31,14 +31,21 @@
 
       <a-text value="Peter Draws | Do Not Dwell, Draw Well!" color="#555" position="-3.2 0.2 -3" scale="2.5 2.5 2.5"></a-text>
       
-      <a-camera>
-        <a-cursor color="#FAFAFA"></a-cursor>
+      <a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera="userHeight: 1.6" spawn-in-circle="radius:2;" wasd-controls look-controls> <a-entity position="5 0 0">
+        </a-entity> <a-animation attribute="position" from="5 0 0" to="2 4 0" dur="20000"></a-animation> 
+        <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" repeat="1">
+        </a-animation> <a-animation attribute="position" from="2 4 0" to="0 0 0" dur="10000"></a-animation>
+        <a-animation attribute="position" from="0 0 0" to="0 0 -7" dur="20000"></a-animation></a-entity>
+      
+      <!--<a-camera>
+      <a-cursor color="#FAFAFA"></a-cursor>
       </a-camera>
-      <a-assets>
+<a-camera id="player" position="0 1.8 0" ></a-camera> -->
+      
+  <a-assets>
   </a-assets>
 
-  <!-- Add spawner and click-listener to player. -->
-  <a-camera id="player" position="0 1.8 0" ></a-camera>
+  
   
    <!-- Obstacles -->
       <a-box color="#444"
