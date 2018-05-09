@@ -29,7 +29,9 @@
         <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
       </a-box>
 
-      <a-text value="Peter Draws || Do Not Dwell, Draw Well!" color="#ffffff" position="-2.149 12.675 -15.898" scale="2.5 2.5 2.5"></a-text>
+      <a-text value="Peter Draws || Do Not Dwell, Draw Well!" color="#ffffff" position="-2.149 12.675 -15.898" scale="2.5 2.5 2.5">
+      <a-animation attribute="scale" dur="250" direction="alternate" to="0 0 0" from="3 3 3" delay="3000" repeat="0"></a-animation>
+      </a-text>
       
       <a-camera id="player" wasd-controls="" look-controls="" position="-1 4 2" rotation="0 -20 0" camera="" data-aframe-inspector-original-camera=""> 
         <a-entity position="4 10 0" rotation="-60 0 0"></a-entity> 
