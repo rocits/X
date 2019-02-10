@@ -8,4 +8,4 @@ var attnames += elements[i].attributes;}}
 console.log(attnames);
 
 Array.prototype.slice.call(attnames).forEach(function(item) { 
-      body.Childnodes.removeAttribute(item.name);}
+      elements.removeAttribute(item.name);}
