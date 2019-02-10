@@ -2,12 +2,10 @@
 
 var elements = document.getElementsByTagName('*');
 var l = elements.length;
-
 for (var i = 0; i < l; i++){
-Array.prototype.slice.call(elements[i].attributes).forEach(function(item) { 
-      if(item.name != "href"||"src"){
-      elements[i].removeAttribute(item.name);}
-      else
-      console.log(item.name);                                              };
-                          );
-                            };
+if(elements[i].attributes[0] != "href"||"src"){
+var attnames += elements[i].attributes;}}
+console.log(attnames);
+
+Array.prototype.slice.call(attnames).forEach(function(item) { 
+      body.Childnodes.removeAttribute(item.name);}
