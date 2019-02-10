@@ -2,9 +2,12 @@
 
 var elements = document.getElementsByTagName('*');
 var l = elements.length;
-for (var i = 0; i < l; i++)
-  {elements[i].removeAttribute("class");
-  console.log = i;};
+var attributes = '';
+
+for (var i = 0; i < l; i++){
+  if(attributes != "href"||"src"){
+ elements[i].removeAttribute("*");
+ console.log = i;}};
 
 /*links=document.getElementsByTagName(%22a%22);
 %20for%20(var%20l%20=%200;%20l%20<%20links.length;%20l++){%20var%20alllinks;
