@@ -14,15 +14,15 @@
 
     <title>Creature Animation</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="RiggingAnimation-001_files/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS 
+    <link href="RiggingAnimation-001_files/bootstrap.css" rel="stylesheet">-->
 
-    <!-- Custom CSS -->
-    <link href="RiggingAnimation-001_files/landing-page.css" rel="stylesheet">
+    <!-- Custom CSS 
+    <link href="RiggingAnimation-001_files/landing-page.css" rel="stylesheet">-->
 
-    <!-- Custom Fonts -->
+    <!-- Custom Fonts 
     <link href="RiggingAnimation-001_files/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="RiggingAnimation-001_files/css.css" rel="stylesheet" type="text/css">
+    <link href="RiggingAnimation-001_files/css.css" rel="stylesheet" type="text/css">-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,16 +36,16 @@
 <body>
 
 <div class="container">
-     <div class="row" id="sampleArea" centered="" style="top: 50px;">
-    <canvas width="1024" height="768" style="cursor: inherit;"></canvas></div>
+     <div class="row" id="sampleArea">
+    <!-- <canvas width="1024" height="768" style="cursor: inherit;"></canvas></div> -->
 
 </div>
 
-    <!-- jQuery -->
-    <script src="RiggingAnimation-001_files/jquery.js"></script>
+    <!-- jQuery 
+    <script src="RiggingAnimation-001_files/jquery.js"></script>-->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="RiggingAnimation-001_files/bootstrap.js"></script>
+    <!-- Bootstrap Core JavaScript 
+    <script src="RiggingAnimation-001_files/bootstrap.js"></script>-->
 
     <script src="RiggingAnimation-001_files/zipfile.js"></script>
     <script src="RiggingAnimation-001_files/multithread.js"></script>
@@ -76,7 +76,7 @@
         };
         // add the renderer view element to the DOM
         document.getElementById("sampleArea").appendChild(renderer.view);    
-        document.getElementById("sampleArea").style.top="50px";
+        //document.getElementById("sampleArea").style.top="50px";
 
         // unzip function
         function onZipReceived(data, filename) {
@@ -328,7 +328,7 @@
                 drawBones(manager_1);
                 graphicsContainer.alpha = c_alpha_2;
 
-                main_msg = "Creature Live WebGL Demo";
+                main_msg = "!!! It's alive !!!";//Creature Live WebGL Demo";
                 stext.setText(main_msg);
                 stext.position.x = winWidth/2 - 120;
                 stext.position.y = 20;
