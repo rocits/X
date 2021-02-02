@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, OPTIONS">
+	<meta http-equiv="Access-Control-Allow-Headers" content="Content-Type">
+	<meta http-equiv="Access-Control-Request-Headers" content="X-Requested-With, accept, content-type">
+	
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+    <title>Creature Animation</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="RiggingAnimation-001_files/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="RiggingAnimation-001_files/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="RiggingAnimation-001_files/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="RiggingAnimation-001_files/css.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div class="container">
+     <div class="row" id="sampleArea" centered="" style="top: 50px;">
+    <canvas width="1024" height="768" style="cursor: inherit;"></canvas></div>
+
+</div>
+
+    <!-- jQuery -->
+    <script src="RiggingAnimation-001_files/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="RiggingAnimation-001_files/bootstrap.js"></script>
+
+    <script src="RiggingAnimation-001_files/zipfile.js"></script>
+    <script src="RiggingAnimation-001_files/multithread.js"></script>
+    <script src="RiggingAnimation-001_files/pixi.js"></script>
+    <script src="RiggingAnimation-001_files/gl-matrix.js"></script>
+    <script src="RiggingAnimation-001_files/CreatureMeshBone.js"></script>
+    <script src="RiggingAnimation-001_files/CreaturePixiJSRenderer.js"></script>
+
+    <script>
+        // Threading
+        var num_threads = 2;
+        var MT = new Multithread(num_threads);
+        var main_msg = "";
+
+        // create an new instance of a pixi stage
+        var winWidth = 1024;
+        var winHeight = 768;
+
+        var stage = new PIXI.Stage(0xFFFFFF);
+ 
+        // create a renderer instance.          
+        var renderer = PIXI.autoDetectRenderer(winWidth, winHeight, null, false, true);
+            
+        if (renderer.type == PIXI.WEBGL_RENDERER) {
+            console.log('Using WebGL');
+        } else {
+            console.log('Using Canvas');
+        };
+        // add the renderer view element to the DOM
+        document.getElementById("sampleArea").appendChild(renderer.view);    
+        document.getElementById("sampleArea").style.top="50px";
+
+        // unzip function
+        function onZipReceived(data, filename) {
+            var zip = new ZipFile(data);
+            var uncompressed = zip.read(filename);
+            console.log('File Unzipped!');
+
+            return uncompressed;
+        }
+
+        // creature functions
+        function createCreature(url, data, filename) {
+            "use strict";
+
+            function str2ab(str) {
+                var buf = new ArrayBuffer(str.length); // 2 bytes for each char
+                var bufView = new Uint8Array(buf);
+                for (var i=0, strLen=str.length; i<strLen; i++) {
+                    bufView[i] = str.charCodeAt(i);
+                }
+                return buf;
+            }
+
+            var url = url.href;
+            var index = url.indexOf('dragon_pixijs.html');
+            if (index != -1) {
+                url = url.substring(0, index);
+            }
+            importScripts(url + 'zipfile.js');
+            var zip = new ZipFile(str2ab(data));
+            var uncompressed = zip.read(filename);
+            console.log('%s ready!', filename);
+
+
+            function Utf8ArrayToStr(array) {
+                var out, i, len, c;
+                var char2, char3;
+
+                out = "";
+                len = array.length;
+                i = 0;
+                while(i < len) {
+                    c = array[i++];
+                    switch(c >> 4)
+                    { 
+                      case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+                        // 0xxxxxxx
+                        out += String.fromCharCode(c);
+                        break;
+                      case 12: case 13:
+                        // 110x xxxx   10xx xxxx
+                        char2 = array[i++];
+                        out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+                        break;
+                      case 14:
+                        // 1110 xxxx  10xx xxxx  10xx xxxx
+                        char2 = array[i++];
+                        char3 = array[i++];
+                        out += String.fromCharCode(((c & 0x0F) << 12) |
+                                       ((char2 & 0x3F) << 6) |
+                                       ((char3 & 0x3F) << 0));
+                        break;
+                    }
+                }
+
+                return out;
+            }
+
+
+            //var str = String.fromCharCode.apply(null, uncompressed);
+            //return str;
+
+            return Utf8ArrayToStr(uncompressed);
+        }
+
+        function doInitCreature(data, poseName, textureName, scale, offsetX, offsetY)
+        {
+            var actual_JSON = JSON.parse(data);
+            var new_creature = new Creature(actual_JSON);
+            
+            var new_animation_1 = new CreatureAnimation(actual_JSON, poseName, new_creature);
+            new_animation_1.start_time = 49;
+
+            var new_manager = new CreatureManager(new_creature);
+            new_manager.AddAnimation(new_animation_1);
+            new_manager.SetActiveAnimationName(poseName, false);
+            new_manager.SetShouldLoop(true);
+            new_manager.SetIsPlaying(true);
+            new_manager.RunAtTime(0);
+
+            // create a texture from an image path
+            var texture = PIXI.Texture.fromImage(textureName);
+
+            var creatureContainer = new PIXI.DisplayObjectContainer();
+            creatureContainer.position.x = winWidth/2 + offsetX;
+            creatureContainer.position.y = winHeight/2 + offsetY;
+
+            creatureContainer.scale.set(scale);
+            stage.addChild(creatureContainer);
+
+            var new_creature_renderer = new CreatureRenderer(new_manager, texture);
+            creatureContainer.addChild(new_creature_renderer);
+
+            return [new_creature, new_manager, new_creature_renderer];
+        }
+
+        function createReturn1(r)
+        {
+            var retdata = doInitCreature(r, "default", "img/dragon2_img.png", 25.0, 30, 0);
+            manager_1 = retdata[1];
+            creature_render_1 = retdata[2];
+            console.log("Done creating creature1");
+
+            creature_ready_1 = true;
+        }
+
+        function createReturn2(r)
+        {
+            var retdata = doInitCreature(r, "default", "img/dino_sample_img.png", 27.0, 30, 0);
+            manager_2 = retdata[1];
+            creature_render_2 = retdata[2];
+
+            console.log("Done creating creature2");
+
+            creature_ready_2 = true;
+        }
+
+
+        function getUpdateProgress(evt) 
+        {
+            if (evt.lengthComputable) 
+            {  
+                //evt.loaded the bytes browser receive
+                //evt.total the total bytes seted by the header
+                //
+                var percentComplete = evt.loaded / evt.total*100;  
+                main_msg = "Downloading " + percentComplete.toFixed(1).toString() + "% Complete...";
+            }
+        }         
+        
+        function requestCreature(zipName, jsonName, returnFunc)
+        {
+            var oReq = new XMLHttpRequest();
+            oReq.open("GET", zipName, true);
+            oReq.onprogress = getUpdateProgress;
+            oReq.overrideMimeType('text/plain; charset=x-user-defined');
+
+            oReq.onreadystatechange = function () {
+                if(oReq.readyState == 4) {
+                    main_msg = "Creating Character Objects..."
+                    var tFunc = MT.process(createCreature, returnFunc);
+                    tFunc(document.location, oReq.response, jsonName);
+                }
+            };
+
+            oReq.send(null);
+        }
+
+        // creature variables
+        var manager_1 = null;
+        var creature_render_1 = null;
+        var creature_ready_1 = false;
+
+        var manager_2 = null;
+        var creature_render_2 = null;
+        var creature_ready_2 = false;
+
+        // creature 1 //http://www.kestrelmoon.com/creature/
+        requestCreature("img/dragon2_sample.json.zip", "dragon2_sample.json", createReturn1);
+        
+        // bone vis
+        var graphics = new PIXI.Graphics();
+        var graphicsContainer = new PIXI.DisplayObjectContainer();
+        graphicsContainer.position.x = winWidth/2 + 20;
+        graphicsContainer.position.y = winHeight/2 - 5;
+
+        graphicsContainer.scale.set(25);
+        stage.addChild(graphicsContainer);
+        graphicsContainer.addChild(graphics);
+
+        // text
+        var stext = new PIXI.Text("Loading Web Demo Content...", {font:"bold 20px Arial", fill:"black"});
+        stage.addChild(stext);
+        stext.position.x = winWidth/2 - 150;
+        stext.position.y = winHeight/2 + 0;
+
+
+        var frameText = new PIXI.Text("", {font:"bold 20px Arial", fill:"black"});
+        stage.addChild(frameText);
+        frameText.position.x = 350;
+        frameText.position.y = winHeight - 30;
+
+        // render loop
+        var g_time = 0.0;
+        var s_time = 0.0;
+        var s_cutoff = 500;
+        var c_alpha_1 = 0.2;
+        var c_alpha_2 = 0;
+        var lastTime = new Date().getTime();
+
+        function getStepVal(inputVal, targetVal, ratio)
+        {
+            return (inputVal * ratio) + ((1.0 - ratio) * targetVal); 
+        }
+
+        function drawBones(manager_in)
+        {
+            var render_composition = manager_in.target_creature.render_composition;
+            var cur_bones = render_composition.getBonesMap();
+
+            //graphics.clear();            
+            graphics.lineStyle(0.05, 0x555E77, 1);
+
+            for(var cur_key in cur_bones)
+            {
+                var cur_bone = cur_bones[cur_key];
+                var start_pt = cur_bone.getWorldStartPt();
+                var end_pt = cur_bone.getWorldEndPt();
+
+                graphics.beginFill(0x008000);
+
+                graphics.moveTo(start_pt[0], -start_pt[1])
+                graphics.lineTo(end_pt[0], -end_pt[1]);
+
+                graphics.endFill();
+
+                graphics.drawCircle(start_pt[0], -start_pt[1], .08);
+                graphics.drawCircle(end_pt[0], -end_pt[1], 0.08);
+
+            }
+        }
+
+        function animate() {
+            requestAnimFrame(animate);
+
+            var currTime = new Date().getTime();
+            var diffTime = currTime - lastTime;
+            var stepTime = diffTime / 500.0;
+            lastTime = currTime;
+
+            if(creature_ready_1)
+            {
+                manager_1.Update(stepTime);
+                creature_render_1.alpha = c_alpha_1;
+                creature_render_1.UpdateData();
+
+                graphics.clear();
+
+                drawBones(manager_1);
+                graphicsContainer.alpha = c_alpha_2;
+
+                main_msg = "Creature Live WebGL Demo";
+                stext.setText(main_msg);
+                stext.position.x = winWidth/2 - 120;
+                stext.position.y = 20;
+                stext.alpha = 1.0;
+
+                if(c_alpha_1 > 0.6)
+                {
+                    frameText.setText("");
+                }
+                else {
+                    frameText.setText("Showing Underlying Skeletal Rig/Bones");
+                }
+                frameText.alpha = c_alpha_2;
+
+            }
+            else {
+                stext.alpha = (Math.sin(g_time * 0.1) + 1.0) * 0.5 * 0.5 + 0.5;
+                stext.setText(main_msg);
+            }
+
+
+            // render the stage   
+            renderer.render(stage);
+            g_time += 1.0;
+            s_time += 1.0;
+
+
+            if(s_time < s_cutoff * 0.5)
+            {
+                c_alpha_1 = getStepVal(c_alpha_1, 1.0, 0.9);
+                c_alpha_2 = getStepVal(c_alpha_2, 0.0, 0.9);
+            }
+            else {
+                c_alpha_1 = getStepVal(c_alpha_1, 0.3, 0.9);
+                c_alpha_2 = getStepVal(c_alpha_2, 1.0, 0.9);
+            }
+
+            if(s_time > s_cutoff)
+            {
+                s_time = 0;
+            }
+
+
+        }    
+
+        requestAnimFrame(animate);
+
+    </script>
+
+
+</body></html>
