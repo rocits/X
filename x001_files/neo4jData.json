@@ -5,9 +5,8 @@
             "graph": {
                 "nodes": [{
                     "id": "1",
-                    "labels": ["User"],
+                    "labels": ["Farmer"],
                     "properties": {
-                        "userId": "eisman"
                     }
                 }, {
                     "id": "2",
