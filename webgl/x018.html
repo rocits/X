@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Peter Draws || Do Not Dwell, Draw Well!</title>
+    <meta name="description" content="Peter Draws | Do Not Dwell, Draw Well!">
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+    
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.1.0/dist/aframe-layout-component.min.js"></script>
+    
+    <!-- <script src="https://sandbox.donmccurdy.com/aframe-extras.js"></script>-->
+
+  </head>
+  <body>
+    <!-- Try changing the preset to one of default, contact, egypt, checkerboard, forest, goaland, yavapai, goldmine, 
+         threetowers, poison, arches, tron, japan, dream, volcano, starry, osiris. -->
+    <!-- See more environment options: https://github.com/feiss/aframe-environment-component#parameters -->
+    <a-scene environment="preset: japan" physics="" >
+      <a-assets>
+        <img id="boxTexture" src="https://rocits.github.io/X/images/geeko.jpg">
+      </a-assets>
+      
+      <a-box position="0 2 -5" rotation="0 45 45" scale="2 2 2" src="#boxTexture">
+        <a-animation attribute="position" direction="alternate" dur="10000" repeat="indefinite"
+          to="0 2.2 -5"></a-animation>
+        <a-animation attribute="rotation" begin="click" dur="2000" to="360 405 45"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="300" to="2.3 2.3 2.3"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
+      </a-box>
+
+      <a-text value="Peter Draws || Do Not Dwell, Draw Well!" color="#ffffff" position="-2.149 12.675 -15.898" scale="2.5 2.5 2.5">
+      <a-animation attribute="scale" dur="250" direction="alternate" to="0 0 0" from="3 3 3" delay="10000" repeat="0"></a-animation>
+      </a-text>
+      
+      <a-camera id="player" wasd-controls="" look-controls="" position="-1 4 2" rotation="0 -20 0" camera="" data-aframe-inspector-original-camera=""> 
+        <a-entity position="4 10 0" rotation="-60 0 0"></a-entity> 
+        <a-animation attribute="position" from="4 10 0" to="2 4 0" dur="20000"></a-animation> 
+        <a-animation attribute="rotation" to="0 360 0" dur="10000" fill="forwards" repeat="1"></a-animation>
+        <!--<a-animation attribute="position" from="2 4 0" to="0 0 0" dur="10000"></a-animation>-->
+        <a-animation attribute="rotation" to="0 -20 0" dur="500"></a-animation>
+        <a-animation attribute="position" to="-1 4 2" dur="500"></a-animation>
+      </a-camera>
+      
+      <!--<a-camera>
+      <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+<a-camera id="player" position="0 1.8 0" ></a-camera> -->
+      
+  <a-assets>
+  </a-assets>
+   <!-- Obstacles -->
+    <a-box color="#444"width="15" height="5" depth="3" position="8 2.5 -5" static-body src="#boxTexture"></a-box>
+    <a-box color="#444" width="15" height="5" depth="3" position="8 2.5 5" static-body src="#boxTexture"></a-box>
+    
+      
+    <a-box color="#444" width="15" height="5" depth="3" position="21.364 0.771 -0.258" static-body="" src="#boxTexture" scale="0.383 0.19 2.33"></a-box>
+    <a-box color="#444" width="15" height="5" depth="3" position="21.438 1.676 2.656" static-body="" src="#boxTexture" scale="0.383 0.19 0.385"></a-box>
+    <a-box color="#444" width="15" height="5" depth="3" position="21.438 1.676 -3.184" static-body="" src="#boxTexture" scale="0.383 0.19 0.385"></a-box>
+    <a-entity position="23.861 1.554 -0.264" rotation="-90 0 0" scale="0.541 6.361 0.475" geometry="primitive:cylinder" material="color:#555"></a-entity>
+    </a-scene>
+    
+<!-- Pitch : You are a Proverbal phrase driven japanese garden rake [to garden rake etc.. environment change] movement and drawing on a surface controls lighting brightness , stopping movement or drawing creates a darker environment 
+after a specific increment of darkness you have to draw to get back to the lighte proverbal literature & surrounding artworks , meanwhile designing concepts/3d structures for a dwelling/s-->
+  
+<!-- VR Designer Pitch : You are a Proverbial phrase driven Japanese garden rake and you cannot stop moving [drawing/designing dwellings] or the world will fade out to a white canvas! https://bitly.com/do-not-dwell or "rakeystones" -->
+  </body>
+</html>
+
+
+
+
+  
+
+

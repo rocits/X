@@ -1,0 +1,33 @@
+ <!DOCTYPE HTML ><html><head><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html" charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script> <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+<script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script><script>AFRAME.registerComponent('spawn-in-circle', {
+  schema: {
+    radius: {type: 'number', default: 1}
+  },
+
+  init: function() {
+    var el = this.el;
+    var center = el.getAttribute('position');
+
+    var angleRad = this.getRandomAngleInRadians();
+    var circlePoint = this.randomPointOnCircle(this.data.radius, angleRad);
+    var worldPoint = {x: circlePoint.x + center.x, y: center.y, z: circlePoint.y + center.z};
+    el.setAttribute('position', worldPoint);
+
+    var angleDeg = angleRad * 180 / Math.PI;
+    var angleToCenter = -1 * angleDeg + 90;
+    var rotationStr = '0 ' + angleToCenter + ' 0';
+    el.setAttribute('rotation', rotationStr);
+  },
+
+  getRandomAngleInRadians: function() {
+    return Math.random()*Math.PI*2;
+  },
+
+  randomPointOnCircle: function (radius, angleRad) {
+    var x = Math.cos(angleRad)*radius;
+    var y = Math.sin(angleRad)*radius;
+    return {x: x, y: y};
+  }
+});</script><script>NAF.schemas.add({template: '#avatar-template',components: [position',rotation']});</script></head><body><a-scene stats networked-scene="room: blocks; debug: true;" width="854" height="480"><a-assets><a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"></a-asset-item><a-asset-item id="raccoon-obj" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/model.obj"></a-asset-item><a-asset-item id="raccoon-mtl" src="./files/networked-aframe-master/server/static/assets/Raccoon_Blocks/materials.mtl"></a-asset-item><a-asset-item id="scene-obj" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/model.obj"></a-asset-item><a-asset-item id="scene-mtl" src="./files/networked-aframe-master/server/static/assets/Campfire_Blocks/materials.mtl"></a-asset-item><img id="sechelt" src="./images/bg3.png"> <script id="avatar-template" type="text/html"><a-entity class="heads"><a-entity obj-model="obj: #raccoon-obj; mtl: #raccoon-mtl" scale="5 5 5"></a-entity></a-entity></script></a-assets><a-entity id="player" networked="template:#avatar-template;showLocalTemplate:false;" camera="userHeight: 1.6" spawn-in-circle="radius:2;" wasd-controls look-controls> <a-entity position="5 0 0"></a-entity> <a-animation attribute="position" from="5 0 0" to="2 4 0" dur="20000"></a-animation> <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" repeat="1"></a-animation> <a-animation attribute="position" from="2 4 0" to="0 0 0" dur="10000"></a-animation> <a-animation attribute="position" from="0 0 0" to="0 0 -7" dur="20000"></a-animation></a-entity><a-sky id="image-360" radius="100" src="#sechelt" data-set-image-fade-setup="true" animation__fade=""></a-sky><a-entity obj-model="obj: #scene-obj; mtl: #scene-mtl" position="-0.542 1.5 -6.206" scale="30 30 30"></a-entity><a-light position="0 20 0" light="color:#FF3300;intensity:0.1"><a-animation attribute="position" from="0 0 0" to="0 20 0" dur="50000"></a-animation> <a-animation attribute="intensity" to="0.9"></a-animation></a-light><a-entity position="0.45 1.45 -6.99" light="type:spot;decay:0.5;angle:35" rotation="-17 -0.01 -6" visible="false"><a-animation attribute="visible" dur="5000" to="true"></a-animation></a-entity><a-entity text-geometry="value: Welcome to ;" material="color:#FF9900; " position="-1.4 0 -9.5" visible="false"> <a-animation attribute="visible" dur="5000" to="true" ></a-animation></a-entity><a-entity text-geometry="value: L.O.S. !!!; font: #optimerBoldFont;" material="color:#FF3300; " position="-0.4 -0.6 -9" visible="false"> <a-animation attribute="visible" dur="5000" to="true"></a-animation></a-entity><a-sphere position="0 1.8 -9" radius="1.25" color="#FFFFFF"></a-sphere> <a-box position="-1 1 -9" rotation="0 45 0" width="1" height="1" depth="1" color="#FFFFFF"></a-box> <a-cylinder position="1 1.25 -9" radius="0.5" height="1.5" color="#FFFFFF"></a-cylinder> <a-plane position="6 0 0" rotation="-90 0 0" width="4" height="4" color="#FFFFFF"></a-plane> <a-entity id="happy-face" position="0 2 -9"> <a-entity mixin="red" line="path: -1 1 0, -1 0.5 0, -1 0 0"></a-entity> <a-entity mixin="red" line="path: 1 1 0, 1 0.5 0, 1 0 0"></a-entity> <a-entity mixin="red" line="path: -2 -1 0, 0 -2 0, 2 -1"></a-entity> </a-entity></a-scene></body></html>
