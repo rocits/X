@@ -763,7 +763,7 @@ if (webComponentsSupported) {
   var script = document.createElement('script');
   script.async = !0,
   //script.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.5.0/custom-elements-es5-adapter.js',
-  script.src = 'https://sv-ginger.appspot.com/bower_components/webcomponentsjs/webcomponents-lite.min.js',
+  script.src = 'webcomponents-lite.min.js',
   document.head.appendChild(script),
   window.addEventListener('WebComponentsReady', function (e) {
     console.log('FALLBACK: WebComponentsReady() fired and components ready.'),
@@ -772,7 +772,7 @@ if (webComponentsSupported) {
 }
 var script = document.createElement('script');
 script.async = !0,
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js',
+script.src = 'three.js',
 script.onload = initGinger,
 document.head.appendChild(script);
 
